@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBM Enterprises</title>
+<style>
+  :root{
+    --navy:#0d2a4d;
+    --navy-dark:#081b33;
+    --orange:#f7941d;
+    --grey-bg:#f4f6f9;
+    --text:#22303f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI', Arial, sans-serif; color:var(--text); background:#fff; line-height:1.6;}
+  a{text-decoration:none;color:inherit;}
+
+  /* HEADER */
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:18px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .logo-area h1{
+    font-size:26px;
+    letter-spacing:1px;
+  }
+  .logo-area span{
+    display:block;
+    font-size:13px;
+    color:var(--orange);
+    font-weight:600;
+    letter-spacing:2px;
+  }
+  nav a{
+    color:#fff;
+    margin-left:25px;
+    font-weight:500;
+    font-size:15px;
+    transition:color .2s;
+  }
+  nav a:hover{color:var(--orange);}
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color:#fff;
+    text-align:center;
+    padding:70px 6%;
+  }
+  .hero h2{font-size:34px; margin-bottom:12px;}
+  .hero p{font-size:17px; color:#dbe4ee; max-width:700px; margin:0 auto;}
+
+  /* SECTION GENERIC */
+  section{padding:60px 6%;}
+  .section-title{
+    text-align:center;
+    font-size:28px;
+    color:var(--navy);
+    margin-bottom:10px;
+    position:relative;
+  }
+  .section-title::after{
+    content:"";
+    display:block;
+    width:60px;
+    height:4px;
+    background:var(--orange);
+    margin:12px auto 0;
+    border-radius:2px;
+  }
+
+  /* ABOUT US */
+  .about{
+    background:var(--grey-bg);
+  }
+  .about-box{
+    max-width:850px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .established{
+    display:inline-block;
+    background:var(--orange);
+    color:#fff;
+    padding:6px 18px;
+    border-radius:20px;
+    font-weight:600;
+    font-size:14px;
+    margin:15px 0 20px;
+  }
+  .about-intro{
+    font-size:16px;
+    color:#3a4a5a;
+    margin-bottom:20px;
+  }
+  .view-more-btn{
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    padding:12px 32px;
+    font-size:15px;
+    font-weight:600;
+    border-radius:6px;
+    cursor:pointer;
+    transition:background .2s;
+  }
+  .view-more-btn:hover{background:var(--orange);}
+
+  .about-details{
+    max-width:900px;
+    margin:35px auto 0;
+    text-align:left;
+    display:none;
+    animation:fadeIn .4s ease-in;
+  }
+  .about-details.show{display:block;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(-10px);} to{opacity:1; transform:translateY(0);}}
+
+  .about-details p{margin-bottom:16px; color:#3a4a5a;}
+
+  .owners{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:20px;
+  }
+  .owner-card{
+    background:#fff;
+    flex:1;
+    min-width:240px;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.07);
+    border-top:4px solid var(--orange);
+  }
+  .owner-card h4{color:var(--navy); font-size:18px; margin-bottom:8px;}
+  .owner-card p{margin:0; font-size:15px; color:#4a5a6a;}
+
+  .products-list{
+    margin-top:25px;
+    padding-left:20px;
+    color:#3a4a5a;
+  }
+  .products-list li{margin-bottom:8px; font-size:15px;}
+
+  /* PARTNERS BANNER */
+  .partners-banner{
+    background:var(--navy-dark);
+    color:#fff;
+    text-align:center;
+    padding:55px 6%;
+  }
+  .partners-banner h2{
+    font-size:26px;
+    margin-bottom:8px;
+  }
+  .partners-banner .sub{
+    color:#a9bdd4;
+    margin-bottom:35px;
+    font-size:15px;
+  }
+  .partner-logos{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+  }
+  .partner-badge{
+    background:#fff;
+    color:var(--navy);
+    font-weight:700;
+    font-size:16px;
+    padding:18px 30px;
+    border-radius:8px;
+    min-width:130px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.25);
+    letter-spacing:0.5px;
+  }
+
+  /* POPULAR PRODUCTS */
+  .popular-heading{
+    text-align:center;
+    font-size:24px;
+    color:var(--navy);
+    margin:10px 0 35px;
+    font-weight:700;
+  }
+  .popular-heading span{color:var(--orange);}
+
+  .product-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:22px;
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .product-card{
+    background:var(--grey-bg);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 3px 10px rgba(0,0,0,0.06);
+    text-align:center;
+    padding-bottom:16px;
+    transition:transform .2s;
+  }
+  .product-card:hover{transform:translateY(-5px);}
+  .product-img-placeholder{
+    height:150px;
+    background:linear-gradient(135deg,#dfe7ef,#c9d6e3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#7d8ea0;
+    font-size:13px;
+    font-weight:600;
+  }
+  .product-card h4{
+    margin:14px 10px 4px;
+    color:var(--navy);
+    font-size:16px;
+  }
+  .product-card p{
+    font-size:13px;
+    color:#6a7a8a;
+    padding:0 12px;
+  }
+
+  /* CONTACT / FOOTER */
+  footer{
+    background:var(--navy);
+    color:#dbe4ee;
+    padding:45px 6% 25px;
+  }
+  .footer-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:30px;
+    justify-content:space-between;
+    max-width:1100px;
+    margin:0 auto 25px;
+  }
+  .footer-col h4{
+    color:#fff;
+    margin-bottom:14px;
+    font-size:17px;
+  }
+  .footer-col p, .footer-col a{
+    font-size:14px;
+    color:#c3d1e0;
+    margin-bottom:8px;
+    display:block;
+  }
+  .footer-col a:hover{color:var(--orange);}
+  .footer-bottom{
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,0.1);
+    padding-top:18px;
+    font-size:13px;
+    color:#8fa3b8;
+  }
+
+  @media(max-width:600px){
+    .hero h2{font-size:26px;}
+    nav a{margin-left:14px; font-size:13px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-area">
+    <h1>SBM Enterprises</h1>
+    <span>SAFETY YOU CAN TRUST</span>
+  </div>
+  <nav>
+    <a href="#about">About Us</a>
+    <a href="#partners">Our Partners</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <h2>Manufacturer &amp; Supplier of Safety Equipment</h2>
+  <p>Hand Gloves, Work Wear, PPE Kits, Safety Products &amp; Packing Material — trusted quality since 2010.</p>
+</div>
+
+<!-- ABOUT US -->
+<section class="about" id="about">
+  <h2 class="section-title">About Us</h2>
+  <div class="about-box">
+    <div class="established">Established in 2010</div>
+    <p class="about-intro">
+      SBM Enterprises has been a dependable name in the industrial safety sector for over a decade,
+      known for quality products and reliable service.
+    </p>
+    <button class="view-more-btn" onclick="toggleDetails()">View More</button>
+
+    <div class="about-details" id="aboutDetails">
+      <p>
+        SBM Enterprises is a leading manufacturer and supplier of hand gloves, work wear, safety footwear,
+        PPE kits, and industrial packing material. Established in 2010, the company has grown steadily by
+        focusing on durability, comfort, and worker safety across manufacturing, construction, and industrial
+        sectors. Every product is manufactured under strict quality checks to ensure it meets industry safety
+        standards while remaining affordable for bulk and retail buyers alike. With a strong distribution
+        network and long-standing partnerships with reputed safety brands, SBM Enterprises continues to be
+        a preferred choice for businesses that never want to compromise on the safety of their workforce.
+      </p>
+
+      <h4 style="color:var(--navy); margin-bottom:10px;">Our Product Range</h4>
+      <ul class="products-list">
+        <li>Industrial Hand Gloves (Cotton, Leather, Nitrile &amp; Cut-Resistant)</li>
+        <li>Work Wear &amp; Industrial Uniforms</li>
+        <li>Personal Protective Equipment (PPE) Kits</li>
+        <li>Safety Helmets, Goggles &amp; Ear Protection</li>
+        <li>Safety Shoes &amp; Footwear</li>
+        <li>Packing &amp; Packaging Material</li>
+      </ul>
+
+      <h4 style="color:var(--navy); margin:22px 0 5px;">Owners</h4>
+      <div class="owners">
+        <div class="owner-card">
+          <h4>Sudhir Kumar</h4>
+          <p>Owner</p>
+          <p>📞 9215591768</p>
+        </div>
+        <div class="owner-card">
+          <h4>Nihal Singh</h4>
+          <p>Owner</p>
+          <p>📞 9992220316</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS BANNER -->
+<section class="partners-banner" id="partners">
+  <h2>Our Channel Partners</h2>
+  <p class="sub">We proudly work with India's leading names in industrial safety</p>
+  <div class="partner-logos">
+    <div class="partner-badge">VENUS</div>
+    <div class="partner-badge">SAFENEX</div>
+    <div class="partner-badge">HIPRO</div>
+    <div class="partner-badge">AGARSON</div>
+    <div class="partner-badge">SAFEWELL</div>
+  </div>
+</section>
+
+<!-- POPULAR PRODUCTS -->
+<section>
+  <h2 class="popular-heading">Most <span>Popular</span> Products by Our Partners</h2>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="product-img-placeholder">Product Image</div>
+      <h4>Cut-Resistant Gloves</h4>
+      <p>High-grip, cut-resistant safety hand gloves</p>
+    </div>
+    <div class="product-card">
+      <div class="product-img-placeholder">Product Image</div>
+      <h4>Safety Helmet</h4>
+      <p>ISI-marked industrial safety helmets</p>
+    </div>
+    <div class="product-card">
+      <div class="product-img-placeholder">Product Image</div>
+      <h4>PPE Coverall Kit</h4>
+      <p>Full-body protective coverall suit</p>
+    </div>
+    <div class="product-card">
+      <div class="product-img-placeholder">Product Image</div>
+      <h4>Safety Shoes</h4>
+      <p>Steel-toe industrial safety footwear</p>
+    </div>
+  </div>
+  <p style="text-align:center; color:#8a97a5; font-size:13px; margin-top:20px;">
+    * Replace the grey placeholders above with your partners' actual product images.
+  </p>
+</section>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>SBM Enterprises</h4>
+      <p>Manufacturer &amp; Supplier of Hand Gloves, Work Wear, PPE &amp; Safety Products.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <p>📞 Sudhir Kumar: 9215591768</p>
+      <p>📞 Nihal Singh: 9992220316</p>
+      <a href="mailto:Nihal_singh19@yahoo.com">✉️ Nihal_singh19@yahoo.com</a>
+    </div>
+    <div class="footer-col">
+      <h4>Address</h4>
+      <p>Bawal Road, Karnawas,<br>Rewari - 123401, Haryana</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 SBM Enterprises. All Rights Reserved.
+  </div>
+</footer>
+
+<script>
+  function toggleDetails(){
+    var el = document.getElementById('aboutDetails');
+    var btn = document.querySelector('.view-more-btn');
+    el.classList.toggle('show');
+    btn.textContent = el.classList.contains('show') ? 'View Less' : 'View More';
+  }
+</script>
+
+</body>
+</html>
